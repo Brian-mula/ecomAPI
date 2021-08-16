@@ -7,6 +7,7 @@ const morgan = require("morgan");
 // import routes
 const userRoutes = require("./routes/auth");
 const productRoutes = require("./routes/products");
+const cartRoutes = require("./routes/cart");
 
 // initialize dotenv
 const app = express();
@@ -35,6 +36,7 @@ app.use(morgan("common"));
 // user routes
 app.use("/api/auth/", userRoutes);
 app.use("/api/products", productRoutes);
+app.use("/api/cart", cartRoutes);
 
 // set up backend server
 app.listen(5000, () => {

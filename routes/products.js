@@ -17,10 +17,9 @@ router.post("/create", async (req, res) => {
 router.put("/product/:id", async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
-    if (product.userId === req.body.userId) {
-      await product.updateOne({ $set: req.body });
-      res.status(200).json("product updated successfully");
-    }
+
+    await product.updateOne({ $set: req.body });
+    res.status(200).json("product updated successfully");
   } catch (error) {
     res.status(500).json(error);
   }
@@ -45,6 +44,14 @@ router.get("/product/:id", async (req, res) => {
   }
 });
 // route to delete product
+router.delete("/product/:id", async (req, res) => {
+  try {
+    await Product.findByIdAndDelete(req.params.id);
+    res.status(200).json("product deleted successfully");
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 
 // export the routes
 module.exports = router;
